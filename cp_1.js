@@ -17,9 +17,16 @@ const hideTooltip = (event) => {
   event.target.removeAttribute("title");
 };
 
-[username, email, comments].forEach((input) => {
-  input.addEventListener("mouseover", showTooltip);
-  input.addEventListener("mouseout", hideTooltip);
+form.addEventListener("mouseover", (event) => {
+  if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+    event.target.setAttribute("title", `Please enter your ${event.target.name}`);
+  }
+});
+
+form.addEventListener("mouseout", (event) => {
+  if (event.target.tagName === "INPUT" || event.target.tagName === "TEXTAREA") {
+    event.target.removeAttribute("title");
+  }
 });
 
 form.addEventListener("submit", (event) => {
@@ -37,3 +44,6 @@ form.addEventListener("submit", (event) => {
     ${comments.value}
   `;
   feedbackDisplay.appendChild(entry);
+
+  form.reset();
+});
