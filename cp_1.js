@@ -22,3 +22,18 @@ const hideTooltip = (event) => {
   input.addEventListener("mouseout", hideTooltip);
 });
 
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); 
+
+ if (!username.value.trim() || !email.value.trim() || !comments.value.trim()) {
+    alert("Please fill in all fields before submitting!");
+    return;
+  }
+
+  const entry = document.createElement("div");
+  entry.className = "feedback-entry";
+  entry.innerHTML = `
+    <strong>${username.value}</strong> (${email.value})<br>
+    ${comments.value}
+  `;
+  feedbackDisplay.appendChild(entry);
